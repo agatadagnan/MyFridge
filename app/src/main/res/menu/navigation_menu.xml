@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_fridge"
+            android:icon="@drawable/ic_fridge"
+            android:title="My Fridge" />
+        <item
+            android:id="@+id/nav_shopping_list"
+            android:icon="@drawable/ic_shopping_list"
+            android:title="Shopping list" />
+        <item
+            android:id="@+id/nav_removed"
+            android:icon="@drawable/ic_deleted"
+            android:title="Thrown out" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="Settings" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_contact"
+                android:icon="@drawable/ic_message"
+                android:title="Contact us" />
+        </menu>
+    </item>
+
+</menu>
