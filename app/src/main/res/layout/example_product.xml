@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+wygląd produktu
 ImageView odpowiada za obrazek, nie wiem czy chcemy go mieć, można by spróbować go zmieniać
 wraz z kategorią jedzenia
 TextView line 1 pierwsza linijka

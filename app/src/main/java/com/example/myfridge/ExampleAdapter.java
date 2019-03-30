@@ -1,5 +1,7 @@
 package com.example.myfridge;
 
+//to jest do tworzenia list produktów jakoś, nie do końca ogarniam, albo chyba do łączenia produktu z wyglądem...
+
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder> {
-    private ArrayList<ExampleItem> mExampleList;
+    private ArrayList<ExampleProduct> mExampleList;
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
         public ImageView mImageView;
@@ -26,21 +28,21 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         }
     }
 
-    public ExampleAdapter(ArrayList<ExampleItem> exampleList) {
+    public ExampleAdapter(ArrayList<ExampleProduct> exampleList) {
         mExampleList = exampleList;
     }
 
     @NonNull
     @Override
     public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_product, parent, false);
         ExampleViewHolder evh = new ExampleViewHolder(v);
         return evh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int i) {
-        ExampleItem currentItem = mExampleList.get(i);
+        ExampleProduct currentItem = mExampleList.get(i);
 
         holder.mImageView.setImageResource(currentItem.getImageResource());
         holder.mTextView1.setText(currentItem.getText1());

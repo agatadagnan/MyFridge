@@ -1,6 +1,6 @@
 package com.example.myfridge;
 
-//okienko do szybkiego dodawania produktów
+//obsługga okienka do szybkiego dodawania produktów
 //jeszcze nic nie robi jbc
 
 import android.app.Dialog;

@@ -1,6 +1,12 @@
 package com.example.myfridge;
 
-//Klasa do ekranu głównego z produktami w lodówce
+/*
+Klasa do ekranu głównego z produktami w lodówce
+
+pomysł jest taki żeby wyświetlać produkty kategoriami, więc jakąś opcję wyboru trzeba dodać u góry.
+Zależnie od kategorii jedzenia będzie wybierana ikonka, jeszcze nie wiem jak to zrobić, myślałam o różnych listach do różnych kategorii
+ale to pewnie wyjdzie później
+*/
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,10 +34,10 @@ public class FridgeFragment extends Fragment {
         //recyclerView.setHasFixedSize(true);  //because it probably doesn't
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ArrayList<ExampleItem> exampleList = new ArrayList<>();
-        exampleList.add(new ExampleItem(R.mipmap.ic_apple, "line 1", "line 2"));
-        exampleList.add(new ExampleItem(R.drawable.ic_bread, "line 3", "line 4"));
-        exampleList.add(new ExampleItem(R.drawable.egg, "line 5", "line 6"));
+        ArrayList<ExampleProduct> exampleList = new ArrayList<>();
+        exampleList.add(new ExampleProduct(R.mipmap.ic_apple, "line 1", "line 2"));
+        exampleList.add(new ExampleProduct(R.drawable.ic_bread, "line 3", "line 4"));
+        exampleList.add(new ExampleProduct(R.drawable.egg, "line 5", "line 6"));
 
         ExampleAdapter mAdapter = new ExampleAdapter(exampleList);
         recyclerView.setAdapter(mAdapter);
