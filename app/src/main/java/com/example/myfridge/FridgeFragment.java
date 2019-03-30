@@ -5,6 +5,7 @@ package com.example.myfridge;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,6 +37,19 @@ public class FridgeFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+
+        FloatingActionButton addProductButton = (FloatingActionButton) rootView.findViewById(R.id.addProductButton);
+        addProductButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialogAdd();
+            }
+        });
         return rootView;
+    }
+
+    public void openDialogAdd(){
+        AddDialog addDialog = new AddDialog();
+        addDialog.show(getFragmentManager(), "AddDialog");
     }
 }
