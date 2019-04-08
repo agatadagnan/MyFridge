@@ -101,7 +101,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
             case "Beverages":
                 exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_drink, name, "some calories"));
                 break;
-            case "Diary products":
+            case "Dairy products":
                 exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_bread, name, "some calories"));
                 break;
         }
@@ -114,7 +114,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
             case "Beverages":
                 exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_drink, name, "some calories"));
                 break;
-            case "Diary products":
+            case "Dairy products":
                 exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_bread, name, "some calories"));
                 break;
         }
