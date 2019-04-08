@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">My Fridge</string>
+    <string-array name="categories">
+        <item>Beverages</item>
+        <item>Diary products</item>
+        <item>Fruits and Vegetables</item>
+        <item>Grain products</item>
+        <item>Meat</item>
+        <item>Spices</item>
+        <item>Sweets</item>
+    </string-array>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
