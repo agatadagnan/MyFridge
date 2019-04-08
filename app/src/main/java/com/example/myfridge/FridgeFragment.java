@@ -92,8 +92,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
     hmmm, to nie będzie raczej na jednej liście tylko chyba różne listy do różnych kategorii, oprócz dodawania produktów do listy
     trzeba tworzyć obiekt food
      */
-
-    //Todo: wali się przy zaakceptowaniu w AddDialog!!!!
+    
     //Todo: ogarnąć się z listami produktów i bazą danych
     @Override
     public void applyData(String name, String category, String dateOfPurchase, String expiration) {
@@ -103,6 +102,9 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
                 break;
             case "Dairy products":
                 exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_bread, name, "some calories"));
+                break;
+            case "Sweets":
+                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_sweets, name,"some calories")); //wiem ze to useless ale kocham slodyczki :')
                 break;
         }
         recyclerView.getAdapter().notifyDataSetChanged();
@@ -116,6 +118,9 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
                 break;
             case "Dairy products":
                 exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_bread, name, "some calories"));
+                break;
+            case "Sweets":
+                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_sweets, name,"some calories"));
                 break;
         }
         recyclerView.getAdapter().notifyDataSetChanged();

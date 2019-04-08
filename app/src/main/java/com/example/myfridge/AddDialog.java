@@ -130,16 +130,12 @@ public class AddDialog extends AppCompatDialogFragment {
                 .setPositiveButton("accept", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("NATALKA", "KAT: " + productCategory.getSelectedItem().toString());
-                        if(expirationDate.getText().toString().isEmpty()) {
-                            Log.d("SZAMBO", "TUTAJ");
-                            //boolean noExpiration = checkBox.isChecked();
-                            boolean noExpiration = true;
-                            String name = productName.getText().toString();
-                            String category = productCategory.getSelectedItem().toString();
-                            String purchase = dateOfPurchase.getText().toString();
-                          //  expirationDate.setText("No expiration date");
-                            listener.applyData(name, category, purchase, noExpiration);
+                        if(productName.getText().toString().isEmpty()) {
+
+                            CharSequence text = "No product name!";
+                            int duration = Toast.LENGTH_SHORT;
+                            Toast toast = Toast.makeText(getContext(), text, duration);
+                            toast.show();
 
                         }else if(dateOfPurchase.getText().toString().isEmpty()){
 
@@ -148,13 +144,25 @@ public class AddDialog extends AppCompatDialogFragment {
                             Toast toast = Toast.makeText(getContext(), text, duration);
                             toast.show();
 
+                        }else if(expirationDate.getText().toString().isEmpty()) {
+
+                            //boolean noExpiration = checkBox.isChecked();
+                            boolean noExpiration = true;
+                            String name = productName.getText().toString();
+                            String category = productCategory.getSelectedItem().toString();
+                            String purchase = dateOfPurchase.getText().toString();
+                            //  expirationDate.setText("No expiration date");
+                            listener.applyData(name, category, purchase, noExpiration);
+
 
                         }else{
+
                             String name = productName.getText().toString();
                             String category = productCategory.getSelectedItem().toString();
                             String expiration = expirationDate.getText().toString(); //moze to lepiej zrobic Calendarem hmmm ¯\_(ツ)_/¯
                             String purchase = dateOfPurchase.getText().toString();
                             listener.applyData(name, category, purchase, expiration);
+
                         }
 
                     }
