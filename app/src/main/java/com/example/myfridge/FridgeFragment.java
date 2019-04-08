@@ -13,9 +13,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +63,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
 
     public void openDialogAdd(){
         AddDialog addDialog = new AddDialog();
+        addDialog.setTargetFragment(this, 1);
         addDialog.show(getFragmentManager(), "AddDialog");
     }
 
@@ -93,13 +96,16 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
     //Todo: wali się przy zaakceptowaniu w AddDialog!!!!
     //Todo: ogarnąć się z listami produktów i bazą danych
     @Override
-    public void applyData(String name, String category, String expiration) {
+    public void applyData(String name, String category, String dateOfPurchase, String expiration) {
         switch (category){
             case "Beverages":
                 exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_drink, name, "some calories"));
+                break;
             case "Diary products":
                 exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_bread, name, "some calories"));
+                break;
         }
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 
     @Override
@@ -107,8 +113,11 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         switch (category){
             case "Beverages":
                 exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_drink, name, "some calories"));
+                break;
             case "Diary products":
                 exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_bread, name, "some calories"));
+                break;
         }
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }
