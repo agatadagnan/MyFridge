@@ -10,19 +10,20 @@ public class Food {
     private String productCategory;
     private String expirationDate;
     private String dateOfPurchase;
-    private CheckBox noExpirationDate; //nie da się przeciążyć konstruktora tymi samymi typami zmiennych, może jakiś checkbox załątwi sprawę...
+    private boolean noExpirationDate; //nie da się przeciążyć konstruktora tymi samymi typami zmiennych, może jakiś checkbox załątwi sprawę...
     private String codeEAN;  //kod kreskowy... ma być obowiązkowy? czy można go dodać później i się nie zepsuje?
     private Integer caloriesPer100g;  //same as kod kreskowy
     private Integer counter;  //żeby wyświetlać najczęściej kupowane, nie mam jeszcze pomysłu jak
 
-    public Food(String productName, String productCategory, String expirationDate) {
+    public Food(String productName, String productCategory, String dateOfPurchase, String expirationDate) {
         this.productName = productName;
         this.productCategory = productCategory;
+        this.dateOfPurchase = dateOfPurchase;
         this.expirationDate = expirationDate;
     }
 
     //konstruktor do produktów bez daty przydatności
-    public Food(String productName, String productCategory, String dateOfPurchase, CheckBox noExpirationDate) {
+    public Food(String productName, String productCategory, String dateOfPurchase, boolean noExpirationDate) {
         this.productName = productName;
         this.productCategory = productCategory;
         this.dateOfPurchase = dateOfPurchase;

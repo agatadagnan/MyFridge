@@ -1,5 +1,6 @@
 package com.example.myfridge;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -56,4 +57,37 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
         onCreate(db);
     }
+
+    public boolean insertProduct(ExampleProduct food){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_NAME, food.getName());
+        contentValues.put(COL_DATE_PUR, food.getPurchase());
+        contentValues.put(COL_DATE_EXP, food.getExpiration());
+        contentValues.put(COL_CALORIES, food.getCalories());
+        long result = -1;
+        switch (food.getCategory()) {
+            case "Beverages":
+                result = db.insert(TABLE_BEVERAGES, null, contentValues);
+            case "Diary products":
+                result = db.insert(TABLE_DIARY_PRODUCTS, null, contentValues);
+            case "Fruits and Vegetables":
+                result = db.insert(TABLE_FRUITS, null, contentValues);
+            case "Grain products":
+                result = db.insert(TABLE_GRAIN, null, contentValues);
+            case "Meat":
+                result = db.insert(TABLE_MEAT, null, contentValues);
+            case "Species":
+                result = db.insert(TABLE_SPICES, null, contentValues);
+            case "Sweets":
+                result = db.insert(TABLE_SWEETS, null, contentValues);
+
+        }
+        if(result == -1){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
 }

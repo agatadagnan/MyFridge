@@ -26,7 +26,7 @@ TextView line 2 druga linijka
             android:padding="2dp" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/productName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/imageView"
@@ -37,11 +37,21 @@ TextView line 2 druga linijka
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/dateOfPurchase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView1"
+            android:layout_below="@+id/productName"
             android:layout_toEndOf="@+id/imageView"
+            android:layout_marginStart="8dp"
+            android:text="line 2"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/expirationDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/productName"
+            android:layout_toEndOf="@+id/dateOfPurchase"
             android:layout_marginStart="8dp"
             android:text="line 2"
             android:textSize="15sp" />

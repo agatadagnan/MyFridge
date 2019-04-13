@@ -19,12 +19,14 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         public ImageView mImageView;
         public TextView mTextView1;
         public TextView mTextView2;
+        public TextView mTextView3;
 
         public ExampleViewHolder(@NonNull View itemView) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.imageView);
-            mTextView1 = itemView.findViewById(R.id.textView1);
-            mTextView2 = itemView.findViewById(R.id.textView2);
+            mTextView1 = itemView.findViewById(R.id.productName);
+            mTextView2 = itemView.findViewById(R.id.dateOfPurchase);
+            mTextView3 = itemView.findViewById(R.id.expirationDate);
         }
     }
 
@@ -45,8 +47,9 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         ExampleProduct currentItem = mExampleList.get(i);
 
         holder.mImageView.setImageResource(currentItem.getImageResource());
-        holder.mTextView1.setText(currentItem.getText1());
-        holder.mTextView2.setText(currentItem.getText2());
+        holder.mTextView1.setText(currentItem.getName());
+        holder.mTextView2.setText(currentItem.getPurchase());
+        holder.mTextView3.setText(currentItem.getExpiration());
     }
 
     @Override

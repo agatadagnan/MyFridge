@@ -35,6 +35,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
     private ExampleAdapter exampleAdapter;
     private Spinner productCategoryF;
     private AddDialog.AddDialogListener listener;
+    private DatabaseOpenHelper productsDB;
 
     @Nullable
     @Override
@@ -47,6 +48,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         //recyclerView.setHasFixedSize(true);  //because it probably doesn't
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        productsDB = new DatabaseOpenHelper(getActivity());
 
         createList();
         createAdapter(exampleList, recyclerView);
@@ -69,9 +71,9 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
 
     public void createList() {
         exampleList = new ArrayList<>();
-        exampleList.add(new ExampleProduct(R.drawable.ic_apple, "line 1", "line 2"));
-        exampleList.add(new ExampleProduct(R.drawable.ic_bread, "line 3", "line 4"));
-        exampleList.add(new ExampleProduct(R.drawable.ic_egg, "line 5", "line 6"));
+        exampleList.add(new ExampleProduct(R.drawable.ic_apple, "line 1", "", "line 2", "expD"));
+        exampleList.add(new ExampleProduct(R.drawable.ic_bread, "line 3","", "line 4", "expD"));
+        exampleList.add(new ExampleProduct(R.drawable.ic_egg, "line 5","", "line 6", "expD"));
     }
 
     public void createAdapter(ArrayList exampleList, RecyclerView recyclerView){
@@ -96,15 +98,16 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
     //Todo: ogarnąć się z listami produktów i bazą danych
     @Override
     public void applyData(String name, String category, String dateOfPurchase, String expiration) {
+        Food food = new Food(name, category, dateOfPurchase, expiration);
         switch (category){
             case "Beverages":
-                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_drink, name, "some calories"));
+                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, expiration));
                 break;
             case "Dairy products":
-                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_bread, name, "some calories"));
+                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_bread, name, category, dateOfPurchase, expiration));
                 break;
             case "Sweets":
-                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_sweets, name,"some calories")); //wiem ze to useless ale kocham slodyczki :')
+                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_sweets, name, category, dateOfPurchase, expiration)); //wiem ze to useless ale kocham slodyczki :')
                 break;
         }
         recyclerView.getAdapter().notifyDataSetChanged();
@@ -112,15 +115,16 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
 
     @Override
     public void applyData(String name, String category, String dateOfPurchase, boolean noExpiration) {
+        Food food = new Food(name,category,dateOfPurchase, noExpiration);
         switch (category){
             case "Beverages":
-                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_drink, name, "some calories"));
+                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, noExpiration));
                 break;
             case "Dairy products":
-                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_bread, name, "some calories"));
+                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_bread, name, category, dateOfPurchase, noExpiration));
                 break;
             case "Sweets":
-                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_sweets, name,"some calories"));
+                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_sweets, name, category, dateOfPurchase, noExpiration));
                 break;
         }
         recyclerView.getAdapter().notifyDataSetChanged();
