@@ -98,16 +98,23 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
     //Todo: ogarnąć się z listami produktów i bazą danych
     @Override
     public void applyData(String name, String category, String dateOfPurchase, String expiration) {
-        Food food = new Food(name, category, dateOfPurchase, expiration);
+        ExampleProduct food;
         switch (category){
             case "Beverages":
-                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, expiration));
+                food = new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, expiration);
+                productsDB.insertProduct(food);
+                exampleList.add(exampleList.size(), food);
                 break;
             case "Dairy products":
-                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_bread, name, category, dateOfPurchase, expiration));
+                food = new ExampleProduct(R.drawable.ic_bread, name, category, dateOfPurchase, expiration);
+                productsDB.insertProduct(food);
+                exampleList.add(exampleList.size(), food);
                 break;
             case "Sweets":
-                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_sweets, name, category, dateOfPurchase, expiration)); //wiem ze to useless ale kocham slodyczki :')
+                food = new ExampleProduct(R.drawable.ic_sweets, name, category, dateOfPurchase, expiration);
+                productsDB.insertProduct(food);
+                exampleList.add(exampleList.size(), food); //wiem ze to useless ale kocham slodyczki :')
+                                                            //dlatego załużyły na oddzielną kategorię :)))
                 break;
         }
         recyclerView.getAdapter().notifyDataSetChanged();
@@ -115,16 +122,22 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
 
     @Override
     public void applyData(String name, String category, String dateOfPurchase, boolean noExpiration) {
-        Food food = new Food(name,category,dateOfPurchase, noExpiration);
+        ExampleProduct food;
         switch (category){
             case "Beverages":
-                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, noExpiration));
+                food = new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, noExpiration);
+                productsDB.insertProduct(food);
+                exampleList.add(exampleList.size(), food);
                 break;
             case "Dairy products":
-                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_bread, name, category, dateOfPurchase, noExpiration));
+                food =  new ExampleProduct(R.drawable.ic_bread, name, category, dateOfPurchase, noExpiration);
+                productsDB.insertProduct(food);
+                exampleList.add(exampleList.size(),food);
                 break;
             case "Sweets":
-                exampleList.add(exampleList.size(), new ExampleProduct(R.drawable.ic_sweets, name, category, dateOfPurchase, noExpiration));
+                food = new ExampleProduct(R.drawable.ic_sweets, name, category, dateOfPurchase, noExpiration);
+                productsDB.insertProduct(food);
+                exampleList.add(exampleList.size(), food);
                 break;
         }
         recyclerView.getAdapter().notifyDataSetChanged();

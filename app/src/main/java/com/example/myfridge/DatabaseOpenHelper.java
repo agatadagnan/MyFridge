@@ -9,26 +9,25 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "Products";
     private static final String TABLE_BEVERAGES = "Beverages";
-    private static final String TABLE_DIARY_PRODUCTS = "Diary Products";
-    private static final String TABLE_FRUITS = "Fruits and Vegetables";
-    private static final String TABLE_GRAIN = "Grain products";
+    private static final String TABLE_DIARY_PRODUCTS = "DiaryProducts";
+    private static final String TABLE_FRUITS = "FruitsAndVegetables";
+    private static final String TABLE_GRAIN = "GrainProducts";
     private static final String TABLE_MEAT = "Meat";
     private static final String TABLE_SPICES = "Spices";
     private static final String TABLE_SWEETS = "Sweets";
     private static final String COL_ID = "ID";
     private static final String COL_NAME = "Name";
-    private static final String COL_DATE_EXP = "Expiration Date";
-    private static final String COL_DATE_PUR = "Date of purchase";
+    private static final String COL_DATE_EXP = "ExpirationDate";
+    private static final String COL_DATE_PUR = "DateOfPurchase";
     private static final String COL_CALORIES = "Calories";
-    private static final String CREATE_TABLE_EXP = "(" + COL_ID + " ID INTEGER PRIMARY KEY AUTOINCREMENT, "
+    private static final String CREATE_TABLE_EXP = "(" + COL_ID + " INTEGER PRIMARY KEY, "
             + COL_NAME + " TEXT, " + COL_DATE_PUR + " DATETIME, " + COL_DATE_EXP + " DATETIME, "
             + COL_CALORIES + " INTEGER" + ")";
-    private static final String CREATE_TABLE_FRUITS = "CREATE TABLE " + TABLE_BEVERAGES
-            + "(" + COL_ID + " ID INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_NAME + " TEXT, "
+    private static final String CREATE_TABLE_FRUITS = "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_NAME + " TEXT, "
             + COL_DATE_PUR + " DATETIME, " + COL_CALORIES + " INTEGER" + ")";
 
     public DatabaseOpenHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
     }
 
     @Override
@@ -88,8 +87,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             case "Sweets":
                 result = db.insert(TABLE_SWEETS, null, contentValues);
                 break;
-
         }
+
         if(result == -1){
             return false;
         }else {
