@@ -69,18 +69,25 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         switch (food.getCategory()) {
             case "Beverages":
                 result = db.insert(TABLE_BEVERAGES, null, contentValues);
+                break;
             case "Diary products":
                 result = db.insert(TABLE_DIARY_PRODUCTS, null, contentValues);
+                break;
             case "Fruits and Vegetables":
                 result = db.insert(TABLE_FRUITS, null, contentValues);
+                break;
             case "Grain products":
                 result = db.insert(TABLE_GRAIN, null, contentValues);
+                break;
             case "Meat":
                 result = db.insert(TABLE_MEAT, null, contentValues);
+                break;
             case "Species":
                 result = db.insert(TABLE_SPICES, null, contentValues);
+                break;
             case "Sweets":
                 result = db.insert(TABLE_SWEETS, null, contentValues);
+                break;
 
         }
         if(result == -1){
