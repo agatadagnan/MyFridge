@@ -77,6 +77,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
 
             }
         });
+
         return rootView;
     }
 
@@ -164,8 +165,15 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         });
     }
 
-    public void removeItem(int position){
+    public void removeItem(Integer position){
         productList.remove(position);
+        Integer result = productsDB.deletaData(position.toString(), productCategoryF);
+        if (result > 0){
+            Toast.makeText(getContext(),"Data deleted", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getContext(),"Data not deleted", Toast.LENGTH_LONG).show();
+        }
+        //exampleList.remove(position);
         exampleAdapter.notifyItemRemoved(position);
         exampleAdapter.notifyItemRangeChanged(position, exampleAdapter.getItemCount());
     }

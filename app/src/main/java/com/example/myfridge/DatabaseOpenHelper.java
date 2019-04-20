@@ -126,4 +126,33 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         }
         return res;
     }
+
+    public Integer deletaData (String id, Spinner category){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Integer result = 0;
+        switch (category.getSelectedItem().toString()){
+            case "Beverages":
+                result = db.delete(TABLE_BEVERAGES, "ID = ?", new String[] {id});
+                break;
+            case "Diary products":
+                result = db.delete(TABLE_DIARY_PRODUCTS, "ID = ?", new String[] {id});
+                break;
+            case "Fruits and Vegetables":
+                result = db.delete(TABLE_FRUITS, "ID = ?", new String[] {id});
+                break;
+            case "Grain products":
+                result = db.delete(TABLE_GRAIN, "ID = ?", new String[] {id});
+                break;
+            case "Meat":
+                result = db.delete(TABLE_MEAT, "ID = ?", new String[] {id});
+                break;
+            case "Spices":
+                result = db.delete(TABLE_SPICES, "ID = ?", new String[] {id});
+                break;
+            case "Sweets":
+                result = db.delete(TABLE_SWEETS, "ID = ?", new String[] {id});
+                break;
+        }
+        return result;
+    }
 }
