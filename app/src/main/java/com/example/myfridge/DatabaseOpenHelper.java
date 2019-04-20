@@ -2,8 +2,10 @@ package com.example.myfridge;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Spinner;
 
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
@@ -20,10 +22,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     private static final String COL_DATE_EXP = "ExpirationDate";
     private static final String COL_DATE_PUR = "DateOfPurchase";
     private static final String COL_CALORIES = "Calories";
-    private static final String CREATE_TABLE_EXP = "(" + COL_ID + " INTEGER PRIMARY KEY, "
+    private static final String CREATE_TABLE_EXP = "(" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_NAME + " TEXT, " + COL_DATE_PUR + " DATETIME, " + COL_DATE_EXP + " DATETIME, "
             + COL_CALORIES + " INTEGER" + ")";
-    private static final String CREATE_TABLE_FRUITS = "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_NAME + " TEXT, "
+    private static final String CREATE_TABLE_FRUITS = "(" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_NAME + " TEXT, "
             + COL_DATE_PUR + " DATETIME, " + COL_CALORIES + " INTEGER" + ")";
 
     public DatabaseOpenHelper(Context context) {
@@ -81,7 +83,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             case "Meat":
                 result = db.insert(TABLE_MEAT, null, contentValues);
                 break;
-            case "Species":
+            case "Spices":
                 result = db.insert(TABLE_SPICES, null, contentValues);
                 break;
             case "Sweets":
@@ -96,4 +98,32 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         }
     }
 
+    public Cursor getTableData(Spinner category){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_BEVERAGES, null);
+        switch (category.getSelectedItem().toString()){
+            case "Beverages":
+                res = db.rawQuery("select * from " + TABLE_BEVERAGES, null);
+                break;
+            case "Diary products":
+                res = db.rawQuery("select * from " + TABLE_DIARY_PRODUCTS, null);
+                break;
+            case "Fruits and Vegetables":
+                res = db.rawQuery("select * from " + TABLE_FRUITS, null);
+                break;
+            case "Grain products":
+                res = db.rawQuery("select * from " + TABLE_GRAIN, null);
+                break;
+            case "Meat":
+                res = db.rawQuery("select * from " + TABLE_MEAT, null);
+                break;
+            case "Spices":
+                res = db.rawQuery("select * from " + TABLE_SPICES, null);
+                break;
+            case "Sweets":
+                res = db.rawQuery("select * from " + TABLE_SWEETS, null);
+                break;
+        }
+        return res;
+    }
 }
