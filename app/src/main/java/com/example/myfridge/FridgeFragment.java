@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -63,6 +64,17 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
             @Override
             public void onClick(View v) {
                 openDialogAdd();
+            }
+        });
+        productCategoryF.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                viewAll();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
         return rootView;
@@ -155,17 +167,14 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
             case "Beverages":
                 food = new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, expiration);
                 productsDB.insertProduct(food);
-                exampleList.add(exampleList.size(), food);
                 break;
             case "Diary products":
                 food = new ExampleProduct(R.drawable.ic_egg, name, category, dateOfPurchase, expiration);
                 productsDB.insertProduct(food);
-                exampleList.add(exampleList.size(), food);
                 break;
             case "Sweets":
                 food = new ExampleProduct(R.drawable.ic_sweets, name, category, dateOfPurchase, expiration);
-                productsDB.insertProduct(food);
-                exampleList.add(exampleList.size(), food); //wiem ze to useless ale kocham slodyczki :')
+                productsDB.insertProduct(food);             //wiem ze to useless ale kocham slodyczki :')
                                                             //dlatego załużyły na oddzielną kategorię :)))
                 break;
         }
@@ -179,19 +188,17 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
             case "Beverages":
                 food = new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, noExpiration);
                 productsDB.insertProduct(food);
-                exampleList.add(food);
                 break;
             case "Diary products":
                 food =  new ExampleProduct(R.drawable.ic_egg, name, category, dateOfPurchase, noExpiration);
                 productsDB.insertProduct(food);
-                exampleList.add(food);
                 break;
             case "Sweets":
                 food = new ExampleProduct(R.drawable.ic_sweets, name, category, dateOfPurchase, noExpiration);
                 productsDB.insertProduct(food);
-                exampleList.add(food);
                 break;
         }
+        //viewAll();
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 }
