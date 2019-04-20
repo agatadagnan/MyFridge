@@ -29,8 +29,8 @@ TextView line 2 druga linijka
             android:id="@+id/productName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/imageView"
             android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/imageView"
             android:text="line 1"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
@@ -41,8 +41,8 @@ TextView line 2 druga linijka
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/productName"
-            android:layout_toEndOf="@+id/imageView"
             android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/imageView"
             android:text="line 2"
             android:textSize="15sp" />
 
@@ -51,10 +51,29 @@ TextView line 2 druga linijka
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/productName"
-            android:layout_toEndOf="@+id/dateOfPurchase"
             android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/dateOfPurchase"
             android:text="line 2"
             android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/image_delete"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_delete" />
+
+        <ImageView
+            android:id="@+id/image_eaten"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="60dp"
+            android:src="@drawable/ic_eaten" />
 
     </RelativeLayout>
     

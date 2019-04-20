@@ -144,6 +144,30 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         exampleAdapter = new ExampleAdapter(exampleList);
         recyclerView.setAdapter(exampleAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        exampleAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                //TODO: co chcemy zrobić jak się kliknie na produkt?
+            }
+
+            @Override
+            public void onDeleteClick(int position) {
+                removeItem(position);
+                //ale też będzie dodawał do listy produktów usuniętych i nowej bazy danych???
+                // i usuwał z bazy danych
+            }
+
+            @Override
+            public void onEatenClick(int position) {
+                removeItem(position);
+            }
+        });
+    }
+
+    public void removeItem(int position){
+        productList.remove(position);
+        exampleAdapter.notifyItemRemoved(position);
+        exampleAdapter.notifyItemRangeChanged(position, exampleAdapter.getItemCount());
     }
 
     public void createSpinner(View rootView) {
@@ -153,11 +177,6 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         productCategoryF.setAdapter(adapter);
     }
-
-    /*
-    hmmm, to nie będzie raczej na jednej liście tylko chyba różne listy do różnych kategorii, oprócz dodawania produktów do listy
-    trzeba tworzyć obiekt food
-     */
     
     //Todo: ogarnąć się z listami produktów i bazą danych
     @Override
@@ -178,6 +197,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
                                                             //dlatego załużyły na oddzielną kategorię :)))
                 break;
         }
+        //viewAll();
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 
