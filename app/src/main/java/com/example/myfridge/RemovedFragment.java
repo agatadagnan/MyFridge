@@ -2,6 +2,7 @@ package com.example.myfridge;
 
 //Klasa do ekranu z wyrzuconymi produktami !!tu java spada z rowerka!!
 
+import android.arch.lifecycle.Lifecycle;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,7 +23,6 @@ public class RemovedFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<ExampleProduct> productList;
     private ExampleAdapter exampleAdapter;
-
 
 
     @Nullable
@@ -73,8 +73,8 @@ public class RemovedFragment extends Fragment {
 
     // a konkretniej to tutaj java spada z rowerka tylko że nie ma żadnego błędu ale no pieprzy się....
     public void removeItem(Integer position){
-        productList.remove(position);
-        /*Integer result = productsDB.deletaData(position.toString(), productCategoryF);
+        productList.remove((int)position);
+        /*Integer result = productsDB.deleteFromDataBase(position.toString(), productCategoryF);
         if (result > 0){
             Toast.makeText(getContext(),"Data deleted", Toast.LENGTH_LONG).show();
         } else {

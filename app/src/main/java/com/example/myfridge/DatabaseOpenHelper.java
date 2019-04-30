@@ -29,7 +29,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             + COL_DATE_PUR + " DATETIME, " + COL_CALORIES + " INTEGER" + ")";
 
     public DatabaseOpenHelper(Context context) {
-        super(context, DATABASE_NAME, null, 2);
+        super(context, DATABASE_NAME, null, 4);
     }
 
     @Override
@@ -127,7 +127,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public Integer deletaData (String id, Spinner category){
+    public Integer deleteFromDataBase(String id, Spinner category){
         SQLiteDatabase db = this.getWritableDatabase();
         Integer result = 0;
         switch (category.getSelectedItem().toString()){

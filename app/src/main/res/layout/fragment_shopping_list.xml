@@ -2,12 +2,62 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent">
+    android:background="@color/ic_launcher_background">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="623dp"
+        android:layout_alignBottom="@+id/list_remove_selected_rows"
+        android:layout_marginBottom="108dp"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/list_view_with_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/item_editText"
+        android:layout_width="301dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="53dp"
+        android:layout_toStartOf="@+id/add_button"
+        android:layout_weight="1"
+        android:hint="@string/item_editText_hint" />
+
+    <Button
+        android:id="@+id/add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Here will be a shopping list???? Or sth else..."
-        android:layout_centerInParent="true"/>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="53dp"
+        android:text="@string/add_button_text" />
+
+    <Button
+        android:id="@+id/list_remove_selected_rows"
+        android:layout_width="201dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/list_clear"
+        android:text="@string/remove_button_text" />
+
+    <Button
+        android:id="@+id/list_clear"
+        android:layout_width="206dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
+        android:text="@string/clear_button_text" />
 
 </RelativeLayout>
