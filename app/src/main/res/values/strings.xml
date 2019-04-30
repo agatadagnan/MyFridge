@@ -2,7 +2,7 @@
     <string name="app_name">My Fridge</string>
     <string-array name="categories">
         <item>Beverages</item>
-        <item>Diary products</item>
+        <item>Dairy products</item>
         <item>Fruits and Vegetables</item>
         <item>Grain products</item>
         <item>Meat</item>

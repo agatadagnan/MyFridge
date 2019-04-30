@@ -101,7 +101,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
                     productList.add(new ExampleProduct(R.drawable.ic_drink, res.getString(1), cat,res.getString(2), res.getString(3)));
                 }
                 break;
-            case "Diary products":
+            case "Dairy products":
                 while (res.moveToNext()){
                     productList.add(new ExampleProduct(R.drawable.ic_egg, res.getString(1), cat,res.getString(2), res.getString(3)));
                 }
@@ -195,7 +195,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
                 food = new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, expiration);
                 productsDB.insertProduct(food);
                 break;
-            case "Diary products":
+            case "Dairy products":
                 food = new ExampleProduct(R.drawable.ic_egg, name, category, dateOfPurchase, expiration);
                 productsDB.insertProduct(food);
                 break;
@@ -217,7 +217,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
                 food = new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, noExpiration);
                 productsDB.insertProduct(food);
                 break;
-            case "Diary products":
+            case "Dairy products":
                 food =  new ExampleProduct(R.drawable.ic_egg, name, category, dateOfPurchase, noExpiration);
                 productsDB.insertProduct(food);
                 break;

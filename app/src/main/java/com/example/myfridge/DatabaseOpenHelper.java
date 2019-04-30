@@ -11,7 +11,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "Products";
     private static final String TABLE_BEVERAGES = "Beverages";
-    private static final String TABLE_DIARY_PRODUCTS = "DiaryProducts";
+    private static final String TABLE_DAIRY_PRODUCTS = "DairyProducts";
     private static final String TABLE_FRUITS = "FruitsAndVegetables";
     private static final String TABLE_GRAIN = "GrainProducts";
     private static final String TABLE_MEAT = "Meat";
@@ -36,7 +36,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL("CREATE TABLE " + TABLE_BEVERAGES + CREATE_TABLE_EXP);
-        db.execSQL("CREATE TABLE " + TABLE_DIARY_PRODUCTS + CREATE_TABLE_EXP);
+        db.execSQL("CREATE TABLE " + TABLE_DAIRY_PRODUCTS + CREATE_TABLE_EXP);
         db.execSQL("CREATE TABLE " + TABLE_FRUITS + CREATE_TABLE_FRUITS);
         db.execSQL("CREATE TABLE " + TABLE_GRAIN + CREATE_TABLE_EXP);
         db.execSQL("CREATE TABLE " + TABLE_MEAT + CREATE_TABLE_EXP);
@@ -49,7 +49,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_BEVERAGES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DIARY_PRODUCTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DAIRY_PRODUCTS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FRUITS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_GRAIN);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEAT);
@@ -71,8 +71,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             case "Beverages":
                 result = db.insert(TABLE_BEVERAGES, null, contentValues);
                 break;
-            case "Diary products":
-                result = db.insert(TABLE_DIARY_PRODUCTS, null, contentValues);
+            case "Dairy products":
+                result = db.insert(TABLE_DAIRY_PRODUCTS, null, contentValues);
                 break;
             case "Fruits and Vegetables":
                 result = db.insert(TABLE_FRUITS, null, contentValues);
@@ -105,8 +105,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             case "Beverages":
                 res = db.rawQuery("select * from " + TABLE_BEVERAGES, null);
                 break;
-            case "Diary products":
-                res = db.rawQuery("select * from " + TABLE_DIARY_PRODUCTS, null);
+            case "Dairy products":
+                res = db.rawQuery("select * from " + TABLE_DAIRY_PRODUCTS, null);
                 break;
             case "Fruits and Vegetables":
                 res = db.rawQuery("select * from " + TABLE_FRUITS, null);
@@ -134,8 +134,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             case "Beverages":
                 result = db.delete(TABLE_BEVERAGES, "ID = ?", new String[] {id});
                 break;
-            case "Diary products":
-                result = db.delete(TABLE_DIARY_PRODUCTS, "ID = ?", new String[] {id});
+            case "Dairy products":
+                result = db.delete(TABLE_DAIRY_PRODUCTS, "ID = ?", new String[] {id});
                 break;
             case "Fruits and Vegetables":
                 result = db.delete(TABLE_FRUITS, "ID = ?", new String[] {id});

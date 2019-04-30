@@ -1,6 +1,6 @@
 package com.example.myfridge;
 
-//Klasa do ekranu z wyrzuconymi produktami
+//Klasa do ekranu z wyrzuconymi produktami !!tu java spada z rowerka!!
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -71,6 +71,7 @@ public class RemovedFragment extends Fragment {
         });
     }
 
+    // a konkretniej to tutaj java spada z rowerka tylko że nie ma żadnego błędu ale no pieprzy się....
     public void removeItem(Integer position){
         productList.remove(position);
         /*Integer result = productsDB.deletaData(position.toString(), productCategoryF);
@@ -80,6 +81,6 @@ public class RemovedFragment extends Fragment {
             Toast.makeText(getContext(),"Data not deleted", Toast.LENGTH_LONG).show();
         }*/
         exampleAdapter.notifyItemRemoved(position);
-        //exampleAdapter.notifyItemRangeChanged(position, productList.size());
+        exampleAdapter.notifyItemRangeChanged(position, productList.size());
     }
 }
