@@ -14,11 +14,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,10 +47,13 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
 
         createSpinner(rootView);
 
+
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         //recyclerView.setHasFixedSize(true);  //because it probably doesn't
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         productsDB = new DatabaseOpenHelper(getActivity());
+        //ExampleProduct food = new ExampleProduct(R.drawable.ic_drink, "dupa", "Beverages", "5/01/2019", "6/03/2019");
+        //productsDB.insertProduct(food);
 
         //createList();
         viewAll();
@@ -70,6 +71,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 viewAll();
+                exampleAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -101,7 +103,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
                     productList.add(new ExampleProduct(R.drawable.ic_drink, res.getString(1), cat,res.getString(2), res.getString(3)));
                 }
                 break;
-            case "Diary products":
+            case "Dairy products":
                 while (res.moveToNext()){
                     productList.add(new ExampleProduct(R.drawable.ic_egg, res.getString(1), cat,res.getString(2), res.getString(3)));
                 }
@@ -166,16 +168,16 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
     }
 
     public void removeItem(Integer position){
-        productList.remove(position);
-        Integer result = productsDB.deletaData(position.toString(), productCategoryF);
+        Integer result = productsDB.deleteFromDataBase(position.toString(), productCategoryF);
         if (result > 0){
+            productList.remove((int)position);
             Toast.makeText(getContext(),"Data deleted", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getContext(),"Data not deleted", Toast.LENGTH_LONG).show();
         }
         //exampleList.remove(position);
         exampleAdapter.notifyItemRemoved(position);
-        exampleAdapter.notifyItemRangeChanged(position, exampleAdapter.getItemCount());
+        exampleAdapter.notifyItemRangeChanged(position, productList.size());
     }
 
     public void createSpinner(View rootView) {
@@ -194,19 +196,21 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
             case "Beverages":
                 food = new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, expiration);
                 productsDB.insertProduct(food);
+                productList.add(food);
                 break;
-            case "Diary products":
+            case "Dairy products":
                 food = new ExampleProduct(R.drawable.ic_egg, name, category, dateOfPurchase, expiration);
                 productsDB.insertProduct(food);
+                productList.add(food);
                 break;
             case "Sweets":
                 food = new ExampleProduct(R.drawable.ic_sweets, name, category, dateOfPurchase, expiration);
                 productsDB.insertProduct(food);             //wiem ze to useless ale kocham slodyczki :')
-                                                            //dlatego załużyły na oddzielną kategorię :)))
+                productList.add(food);                      //dlatego załużyły na oddzielną kategorię :)))
                 break;
         }
         //viewAll();
-        recyclerView.getAdapter().notifyDataSetChanged();
+        exampleAdapter.notifyItemInserted(productList.size()-1);
     }
 
     @Override
@@ -216,17 +220,22 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
             case "Beverages":
                 food = new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, noExpiration);
                 productsDB.insertProduct(food);
+                productList.add(food);
                 break;
-            case "Diary products":
+            case "Dairy products":
                 food =  new ExampleProduct(R.drawable.ic_egg, name, category, dateOfPurchase, noExpiration);
                 productsDB.insertProduct(food);
+                productList.add(food);
                 break;
             case "Sweets":
                 food = new ExampleProduct(R.drawable.ic_sweets, name, category, dateOfPurchase, noExpiration);
                 productsDB.insertProduct(food);
+                productList.add(food);
                 break;
         }
         //viewAll();
-        recyclerView.getAdapter().notifyDataSetChanged();
+        exampleAdapter.notifyItemInserted(productList.size()-1);
+        exampleAdapter.notifyItemRangeChanged(productList.size()-1, productList.size());
+
     }
 }

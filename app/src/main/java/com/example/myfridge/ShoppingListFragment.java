@@ -9,12 +9,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
 
 public class ShoppingListFragment extends Fragment {
 
-    @Nullable
+    private ArrayList<String> shoppingList = new ArrayList<>();
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_shopping_list, container, false);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().setTitle("Shopping list");
+        ArrayAdapter<String> adapret = new ArrayAdapter<String>(getActivity(), R.layout.fragment_shopping_list, shoppingList);
+
     }
 }
