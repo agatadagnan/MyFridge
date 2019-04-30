@@ -90,11 +90,11 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
     public void viewAll(){
         Cursor res = productsDB.getTableData(productCategoryF);
         String cat = productCategoryF.getSelectedItem().toString();
+        productList = new ArrayList<>();
         if(res.getCount() == 0){
             Toast.makeText(getActivity(), "No data", Toast.LENGTH_LONG).show();
             return;
         }
-        productList = new ArrayList<>();
         switch (cat) {
             case "Beverages":
                 while (res.moveToNext()){
