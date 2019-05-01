@@ -105,6 +105,13 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         holder.mTextView3.setText(currentItem.getExpiration());
     }
 
+    // ta funkcja update'uje mExampleList zanim powiadomi o zmianie zestawu danych
+    // zestaw danych jest przypisywany tylko w momencie inicjalizacji
+    public void updateAndNotify(ArrayList<ExampleProduct> e) {
+        mExampleList = e;
+        this.notifyItemInserted(mExampleList.size() - 1);
+    }
+
     @Override
     public int getItemCount() {
         return mExampleList.size();

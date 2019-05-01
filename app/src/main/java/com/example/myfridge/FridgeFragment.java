@@ -176,6 +176,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
             Toast.makeText(getContext(),"Data not deleted", Toast.LENGTH_LONG).show();
         }
         //exampleList.remove(position);
+        // TODO: Do naprawy analogicznie do applyData
         exampleAdapter.notifyItemRemoved(position);
         exampleAdapter.notifyItemRangeChanged(position, productList.size());
     }
@@ -210,7 +211,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
                 break;
         }
         //viewAll();
-        exampleAdapter.notifyItemInserted(productList.size()-1);
+        exampleAdapter.updateAndNotify(productList);
     }
 
     @Override
@@ -234,8 +235,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
                 break;
         }
         //viewAll();
-        exampleAdapter.notifyItemInserted(productList.size()-1);
-        exampleAdapter.notifyItemRangeChanged(productList.size()-1, productList.size());
+        exampleAdapter.updateAndNotify(productList);
 
     }
 }
