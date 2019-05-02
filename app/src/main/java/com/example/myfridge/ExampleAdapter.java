@@ -107,9 +107,15 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
     // ta funkcja update'uje mExampleList zanim powiadomi o zmianie zestawu danych
     // zestaw danych jest przypisywany tylko w momencie inicjalizacji
-    public void updateAndNotify(ArrayList<ExampleProduct> e) {
-        mExampleList = e;
+    public void updateAndNotify(ExampleProduct product) {
+        mExampleList.add(product);
         this.notifyItemInserted(mExampleList.size() - 1);
+    }
+
+    public void removeAndNotify(int position) {
+        mExampleList.remove(position);
+        this.notifyItemRemoved(position);
+        this.notifyItemRangeChanged(position, mExampleList.size());
     }
 
     @Override

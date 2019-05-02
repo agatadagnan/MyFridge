@@ -177,8 +177,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         }
         //exampleList.remove(position);
         // TODO: Do naprawy analogicznie do applyData
-        exampleAdapter.notifyItemRemoved(position);
-        exampleAdapter.notifyItemRangeChanged(position, productList.size());
+        exampleAdapter.removeAndNotify(position);
     }
 
     public void createSpinner(View rootView) {
@@ -211,7 +210,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
                 break;
         }
         //viewAll();
-        exampleAdapter.updateAndNotify(productList);
+        exampleAdapter.updateAndNotify(productList.get(productList.size() - 1));
     }
 
     @Override
@@ -235,7 +234,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
                 break;
         }
         //viewAll();
-        exampleAdapter.updateAndNotify(productList);
+        exampleAdapter.updateAndNotify(productList.get(productList.size() - 1));
 
     }
 }
