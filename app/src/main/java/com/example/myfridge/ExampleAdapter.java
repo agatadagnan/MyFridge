@@ -118,6 +118,11 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         this.notifyItemRangeChanged(position, mExampleList.size());
     }
 
+    public void updateAndNotify(ArrayList<ExampleProduct> productList) {
+        mExampleList = productList;
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return mExampleList.size();
