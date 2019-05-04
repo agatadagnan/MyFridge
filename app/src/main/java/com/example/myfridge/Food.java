@@ -1,6 +1,7 @@
 package com.example.myfridge;
 
 //najlepsza klasa świata, jak tylko wymyślimy co ma w niej być
+// do usunięcia chyba
 
 import android.widget.CheckBox;
 

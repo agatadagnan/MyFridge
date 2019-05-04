@@ -46,7 +46,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         rootView = inflater.inflate(R.layout.fragment_fridge, container, false);
 
         createSpinner(rootView);
-
+        getActivity().setTitle("My Fridge");
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         //recyclerView.setHasFixedSize(true);  //because it probably doesn't
