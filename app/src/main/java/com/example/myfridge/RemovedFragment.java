@@ -3,6 +3,7 @@ package com.example.myfridge;
 //Klasa do ekranu z wyrzuconymi produktami !!tu java spada z rowerka!!
 
 import android.arch.lifecycle.Lifecycle;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,6 +24,7 @@ public class RemovedFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<ExampleProduct> productList;
     private ExampleAdapter exampleAdapter;
+    private DatabaseOpenHelper productsDB;
 
 
     @Nullable
@@ -34,8 +36,10 @@ public class RemovedFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         //recyclerView.setHasFixedSize(true);  //because it probably doesn't
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        productsDB = new DatabaseOpenHelper(getActivity());
 
-        createList();
+        //createList();
+        viewAll();
         createAdapter(productList, recyclerView);
 
         return rootView;
@@ -72,16 +76,59 @@ public class RemovedFragment extends Fragment {
         });
     }
 
+    public void viewAll() {
+        Cursor res = productsDB.getRemovedData();
+        productList = new ArrayList<>();
+        if (res.getCount() == 0) {
+            Toast.makeText(getActivity(), "No data", Toast.LENGTH_LONG).show();
+            return;
+        }else {
+            while(res.moveToNext()){
+                switch (res.getString(3)) {
+                    case "Beverages":
+                        productList.add(new ExampleProduct(R.drawable.ic_drink, res.getString(1), res.getString(3), res.getString(2)));
+                        productList.get(productList.size() - 1).setDbId(res.getInt(0));
+                        break;
+                    case "Dairy products":
+                        productList.add(new ExampleProduct(R.drawable.ic_egg, res.getString(1), res.getString(3), res.getString(2)));
+                        productList.get(productList.size() - 1).setDbId(res.getInt(0));
+                        break;
+                    case "Fruits and Vegetables":
+                        productList.add(new ExampleProduct(R.drawable.ic_apple, res.getString(1), res.getString(3), res.getString(2)));
+                        productList.get(productList.size() - 1).setDbId(res.getInt(0));
+                        break;
+                    case "Grain products":
+                        productList.add(new ExampleProduct(R.drawable.ic_bread, res.getString(1), res.getString(3), res.getString(2)));
+                        productList.get(productList.size() - 1).setDbId(res.getInt(0));
+                        break;
+                    case "Meat":
+                        productList.add(new ExampleProduct(R.drawable.ic_meat, res.getString(1), res.getString(3), res.getString(2)));
+                        productList.get(productList.size() - 1).setDbId(res.getInt(0));
+                        break;
+                    case "Spices":
+                        productList.add(new ExampleProduct(R.drawable.ic_salt, res.getString(1), res.getString(3), res.getString(2)));
+                        productList.get(productList.size() - 1).setDbId(res.getInt(0));
+                        break;
+                    case "Sweets":
+                        productList.add(new ExampleProduct(R.drawable.ic_sweets, res.getString(1), res.getString(3), res.getString(2)));
+                        productList.get(productList.size() - 1).setDbId(res.getInt(0));
+                        break;
+                }
+            }
+        }
+    }
+
     // a konkretniej to tutaj java spada z rowerka tylko że nie ma żadnego błędu ale no pieprzy się....
     public void removeItem(Integer position){
-        productList.remove((int)position);
-        /*Integer result = productsDB.deleteFromDataBase(position.toString(), productCategoryF);
+        //productList.remove((int)position);
+        Integer result = productsDB.deleteRemoved(position.toString());
         if (result > 0){
             Toast.makeText(getContext(),"Data deleted", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getContext(),"Data not deleted", Toast.LENGTH_LONG).show();
-        }*/
-        exampleAdapter.notifyItemRemoved(position);
-        exampleAdapter.notifyItemRangeChanged(position, productList.size());
+        }
+        exampleAdapter.removeAndNotify(position);
+        //exampleAdapter.notifyItemRemoved(position);
+        //exampleAdapter.notifyItemRangeChanged(position, productList.size());
     }
 }

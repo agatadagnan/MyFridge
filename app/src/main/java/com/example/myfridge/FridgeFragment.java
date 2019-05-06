@@ -169,16 +169,29 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
 
             @Override
             public void onEatenClick(int position) {
-                removeItem(position);
+                eatItem(position);
             }
         });
     }
 
     public void removeItem(Integer position){
         ExampleProduct productToRemove = productList.get(position);
+        Integer result = productsDB.deleteAndThrowOut(String.valueOf(productToRemove.getDbId()), productToRemove.getCategory(), productsDB, position);
+        if (result > 0){
+            //productList.remove((int)position);
+            Toast.makeText(getContext(),"Data deleted", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getContext(),"Data not deleted", Toast.LENGTH_LONG).show();
+        }
+        //exampleList.remove(position);
+        exampleAdapter.removeAndNotify(position);
+    }
+
+    public void eatItem(Integer position){
+        ExampleProduct productToRemove = productList.get((int)position);
         Integer result = productsDB.deleteFromDataBase(String.valueOf(productToRemove.getDbId()), productToRemove.getCategory());
         if (result > 0){
-            productList.remove((int)position);
+            //productList.remove((int)position);
             Toast.makeText(getContext(),"Data deleted", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getContext(),"Data not deleted", Toast.LENGTH_LONG).show();

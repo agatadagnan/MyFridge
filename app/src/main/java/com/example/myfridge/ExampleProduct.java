@@ -11,6 +11,8 @@ tak naprawde to powinna być klasa Food
 
  */
 
+import java.util.Calendar;
+
 public class ExampleProduct {
     private long dbId;
     private int mImageResource;
@@ -19,6 +21,7 @@ public class ExampleProduct {
     private String dateOfPurchase;
     private String expirationDate;
     private Integer caloriesPer100g;
+    private String date;
 
 
     public ExampleProduct(int imageResource, String name, String category, String dateOfPurchase, String expirationDate) {
@@ -37,6 +40,22 @@ public class ExampleProduct {
         this.dateOfPurchase = dateOfPurchase;
         expirationDate = null;
         caloriesPer100g = null;
+    }
+
+    public ExampleProduct(int imageResource, String name, String category, String date){
+        mImageResource = imageResource;
+        productCategory = category;
+        productName = name;
+        this.date = date;
+    }
+
+    public String date(){
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) +1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        String date1 = month + "/" + day + "/" + year;
+        return date1;
     }
 
     public void setDbId(long dbId) {
@@ -64,4 +83,6 @@ public class ExampleProduct {
     public String getCategory() { return productCategory; }
 
     public Integer getCalories() { return caloriesPer100g; }
+
+    public String getDate() { return date; }
 }
