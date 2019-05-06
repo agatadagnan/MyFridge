@@ -22,7 +22,9 @@ nasze głowne okno, dodałam floating button, który działa :))))
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/productCategoryF"
+        android:layout_marginTop="0dp">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
