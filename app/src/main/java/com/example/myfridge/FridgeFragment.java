@@ -207,6 +207,18 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
             case "Dairy products":
                 food = new ExampleProduct(R.drawable.ic_egg, name, category, dateOfPurchase, expiration);
                 break;
+            case "Grain products":
+                food = new ExampleProduct(R.drawable.ic_bread, name, category, dateOfPurchase, expiration);
+                break;
+            case "Fruits and Vegetables":
+                food = new ExampleProduct(R.drawable.ic_apple, name, category, dateOfPurchase, expiration);
+                break;
+            case "Meat":
+                food = new ExampleProduct(R.drawable.ic_meat, name, category, dateOfPurchase, expiration);
+                break;
+            case "Spices":
+                food = new ExampleProduct(R.drawable.ic_salt, name, category, dateOfPurchase, expiration);
+                break;
             case "Sweets":
                 food = new ExampleProduct(R.drawable.ic_sweets, name, category, dateOfPurchase, expiration);
                 //wiem ze to useless ale kocham slodyczki :')
@@ -215,8 +227,8 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         }
         newId = productsDB.insertProduct(food);
         food.setDbId(newId);
-        productList.add(food);
-        exampleAdapter.updateAndNotify(productList.get(productList.size() - 1));
+        //productList.add(food);
+        //exampleAdapter.updateAndNotify(productList.get(productList.size() - 1));
     }
 
     @Override
@@ -230,14 +242,29 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
             case "Dairy products":
                 food =  new ExampleProduct(R.drawable.ic_egg, name, category, dateOfPurchase, noExpiration);
                 break;
+            case "Fruits and Vegetables":
+                food = new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, noExpiration);
+                break;
+            case "Grain products":
+                food = new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, noExpiration);
+                break;
+            case "Meat":
+                food = new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, noExpiration);
+                break;
+            case "Spices":
+                food = new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, noExpiration);
+                break;
             case "Sweets":
                 food = new ExampleProduct(R.drawable.ic_sweets, name, category, dateOfPurchase, noExpiration);
                 break;
         }
         newId = productsDB.insertProduct(food);
         food.setDbId(newId);
-        productList.add(food);
-        exampleAdapter.updateAndNotify(productList.get(productList.size() - 1));
+
+
+        //tego nie powinno tu być!!!
+        //productList.add(food);
+        //exampleAdapter.updateAndNotify(productList.get(productList.size() - 1));
 
     }
 }

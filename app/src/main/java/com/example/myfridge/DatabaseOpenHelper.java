@@ -64,29 +64,35 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_NAME, food.getName());
         contentValues.put(COL_DATE_PUR, food.getPurchase());
-        contentValues.put(COL_DATE_EXP, food.getExpiration());
+        //contentValues.put(COL_DATE_EXP, food.getExpiration());
         contentValues.put(COL_CALORIES, food.getCalories());
         long result = -1;
         switch (food.getCategory()) {
             case "Beverages":
+                contentValues.put(COL_DATE_EXP, food.getExpiration());
                 result = db.insert(TABLE_BEVERAGES, null, contentValues);
                 break;
             case "Dairy products":
+                contentValues.put(COL_DATE_EXP, food.getExpiration());
                 result = db.insert(TABLE_DAIRY_PRODUCTS, null, contentValues);
                 break;
             case "Fruits and Vegetables":
                 result = db.insert(TABLE_FRUITS, null, contentValues);
                 break;
             case "Grain products":
+                contentValues.put(COL_DATE_EXP, food.getExpiration());
                 result = db.insert(TABLE_GRAIN, null, contentValues);
                 break;
             case "Meat":
+                contentValues.put(COL_DATE_EXP, food.getExpiration());
                 result = db.insert(TABLE_MEAT, null, contentValues);
                 break;
             case "Spices":
+                contentValues.put(COL_DATE_EXP, food.getExpiration());
                 result = db.insert(TABLE_SPICES, null, contentValues);
                 break;
             case "Sweets":
+                contentValues.put(COL_DATE_EXP, food.getExpiration());
                 result = db.insert(TABLE_SWEETS, null, contentValues);
                 break;
         }
