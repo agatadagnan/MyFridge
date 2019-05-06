@@ -25,9 +25,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.myfridge.R;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -116,8 +114,6 @@ public class AddDialog extends AppCompatDialogFragment {
                 R.array.categories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         productCategory.setAdapter(adapter);
-
-        //przy kliknięciu accept się wali... "Attempt to invoke interface method (...) on a null object reference at(...)" linia 73
 
         builder.setView(view).
                 setTitle("Add Product").

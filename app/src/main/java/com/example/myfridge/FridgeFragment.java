@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -47,6 +48,14 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
 
         createSpinner(rootView);
         getActivity().setTitle("My Fridge");
+        final SwipeRefreshLayout pullToRefresh = rootView.findViewById(R.id.pullToRefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshData(); // your code
+                pullToRefresh.setRefreshing(false);
+            }
+        });
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         //recyclerView.setHasFixedSize(true);  //because it probably doesn't
@@ -83,10 +92,16 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         return rootView;
     }
 
+
     public void openDialogAdd(){
         AddDialog addDialog = new AddDialog();
         addDialog.setTargetFragment(this, 1);
         addDialog.show(getFragmentManager(), "AddDialog");
+    }
+
+    public void refreshData(){
+        viewAll();
+        exampleAdapter.updateAndNotify(productList);
     }
 
     public void viewAll(){
@@ -208,7 +223,6 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         productCategoryF.setAdapter(adapter);
     }
     
-    //Todo: ogarnąć się z listami produktów i bazą danych
     @Override
     public void applyData(String name, String category, String dateOfPurchase, String expiration) {
         ExampleProduct food = null;
@@ -240,8 +254,6 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         }
         newId = productsDB.insertProduct(food);
         food.setDbId(newId);
-        //productList.add(food);
-        //exampleAdapter.updateAndNotify(productList.get(productList.size() - 1));
     }
 
     @Override
@@ -273,11 +285,6 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         }
         newId = productsDB.insertProduct(food);
         food.setDbId(newId);
-
-
-        //tego nie powinno tu być!!!
-        //productList.add(food);
-        //exampleAdapter.updateAndNotify(productList.get(productList.size() - 1));
 
     }
 }
