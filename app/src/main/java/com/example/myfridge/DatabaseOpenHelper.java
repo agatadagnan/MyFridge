@@ -59,7 +59,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertProduct(ExampleProduct food){
+    public long insertProduct(ExampleProduct food){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_NAME, food.getName());
@@ -91,11 +91,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 break;
         }
 
-        if(result == -1){
-            return false;
-        }else {
-            return true;
-        }
+        return result;
     }
 
     public Cursor getTableData(Spinner category){
@@ -127,10 +123,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public Integer deleteFromDataBase(String id, Spinner category){
+    public Integer deleteFromDataBase(String id, String category){
         SQLiteDatabase db = this.getWritableDatabase();
         Integer result = 0;
-        switch (category.getSelectedItem().toString()){
+        switch (category){
             case "Beverages":
                 result = db.delete(TABLE_BEVERAGES, "ID = ?", new String[] {id});
                 break;

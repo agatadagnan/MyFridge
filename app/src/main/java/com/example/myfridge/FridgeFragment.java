@@ -71,7 +71,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 viewAll();
-                exampleAdapter.notifyDataSetChanged();
+                exampleAdapter.updateAndNotify(productList);
             }
 
             @Override
@@ -92,45 +92,52 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
     public void viewAll(){
         Cursor res = productsDB.getTableData(productCategoryF);
         String cat = productCategoryF.getSelectedItem().toString();
+        productList = new ArrayList<>();
         if(res.getCount() == 0){
             Toast.makeText(getActivity(), "No data", Toast.LENGTH_LONG).show();
             return;
         }
-        productList = new ArrayList<>();
         switch (cat) {
             case "Beverages":
-                while (res.moveToNext()){
-                    productList.add(new ExampleProduct(R.drawable.ic_drink, res.getString(1), cat,res.getString(2), res.getString(3)));
+                while (res.moveToNext()) {
+                    productList.add(new ExampleProduct(R.drawable.ic_drink, res.getString(1), cat, res.getString(2), res.getString(3)));
+                    productList.get(productList.size() - 1).setDbId(res.getInt(0));
                 }
                 break;
             case "Dairy products":
-                while (res.moveToNext()){
-                    productList.add(new ExampleProduct(R.drawable.ic_egg, res.getString(1), cat,res.getString(2), res.getString(3)));
+                while (res.moveToNext()) {
+                    productList.add(new ExampleProduct(R.drawable.ic_egg, res.getString(1), cat, res.getString(2), res.getString(3)));
+                    productList.get(productList.size() - 1).setDbId(res.getInt(0));
                 }
                 break;
             case "Fruits and Vegetables":
-                while (res.moveToNext()){
-                    productList.add(new ExampleProduct(R.drawable.ic_apple, res.getString(1), cat,res.getString(2), true));
+                while (res.moveToNext()) {
+                    productList.add(new ExampleProduct(R.drawable.ic_apple, res.getString(1), cat, res.getString(2), true));
+                    productList.get(productList.size() - 1).setDbId(res.getInt(0));
                 }
                 break;
             case "Grain products":
-                while (res.moveToNext()){
-                    productList.add(new ExampleProduct(R.drawable.ic_bread, res.getString(1), cat,res.getString(2), res.getString(3)));
+                while (res.moveToNext()) {
+                    productList.add(new ExampleProduct(R.drawable.ic_bread, res.getString(1), cat, res.getString(2), res.getString(3)));
+                    productList.get(productList.size() - 1).setDbId(res.getInt(0));
                 }
                 break;
             case "Meat":
-                while (res.moveToNext()){
-                    productList.add(new ExampleProduct(R.drawable.ic_meat, res.getString(1), cat,res.getString(2), res.getString(3)));
+                while (res.moveToNext()) {
+                    productList.add(new ExampleProduct(R.drawable.ic_meat, res.getString(1), cat, res.getString(2), res.getString(3)));
+                    productList.get(productList.size() - 1).setDbId(res.getInt(0));
                 }
                 break;
             case "Spices":
-                while (res.moveToNext()){
-                    productList.add(new ExampleProduct(R.drawable.ic_salt, res.getString(1), cat,res.getString(2), res.getString(3)));
+                while (res.moveToNext()) {
+                    productList.add(new ExampleProduct(R.drawable.ic_salt, res.getString(1), cat, res.getString(2), res.getString(3)));
+                    productList.get(productList.size() - 1).setDbId(res.getInt(0));
                 }
                 break;
             case "Sweets":
-                while (res.moveToNext()){
-                    productList.add(new ExampleProduct(R.drawable.ic_sweets, res.getString(1), cat,res.getString(2), res.getString(3)));
+                while (res.moveToNext()) {
+                    productList.add(new ExampleProduct(R.drawable.ic_sweets, res.getString(1), cat, res.getString(2), res.getString(3)));
+                    productList.get(productList.size() - 1).setDbId(res.getInt(0));
                 }
                 break;
         }
@@ -168,7 +175,8 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
     }
 
     public void removeItem(Integer position){
-        Integer result = productsDB.deleteFromDataBase(position.toString(), productCategoryF);
+        ExampleProduct productToRemove = productList.get(position);
+        Integer result = productsDB.deleteFromDataBase(String.valueOf(productToRemove.getDbId()), productToRemove.getCategory());
         if (result > 0){
             productList.remove((int)position);
             Toast.makeText(getContext(),"Data deleted", Toast.LENGTH_LONG).show();
@@ -176,8 +184,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
             Toast.makeText(getContext(),"Data not deleted", Toast.LENGTH_LONG).show();
         }
         //exampleList.remove(position);
-        exampleAdapter.notifyItemRemoved(position);
-        exampleAdapter.notifyItemRangeChanged(position, productList.size());
+        exampleAdapter.removeAndNotify(position);
     }
 
     public void createSpinner(View rootView) {
@@ -191,51 +198,46 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
     //Todo: ogarnąć się z listami produktów i bazą danych
     @Override
     public void applyData(String name, String category, String dateOfPurchase, String expiration) {
-        ExampleProduct food;
+        ExampleProduct food = null;
+        long newId = 0;
         switch (category){
             case "Beverages":
                 food = new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, expiration);
-                productsDB.insertProduct(food);
-                productList.add(food);
                 break;
             case "Dairy products":
                 food = new ExampleProduct(R.drawable.ic_egg, name, category, dateOfPurchase, expiration);
-                productsDB.insertProduct(food);
-                productList.add(food);
                 break;
             case "Sweets":
                 food = new ExampleProduct(R.drawable.ic_sweets, name, category, dateOfPurchase, expiration);
-                productsDB.insertProduct(food);             //wiem ze to useless ale kocham slodyczki :')
-                productList.add(food);                      //dlatego załużyły na oddzielną kategorię :)))
+                //wiem ze to useless ale kocham slodyczki :')
+                //dlatego załużyły na oddzielną kategorię :)))
                 break;
         }
-        //viewAll();
-        exampleAdapter.notifyItemInserted(productList.size()-1);
+        newId = productsDB.insertProduct(food);
+        food.setDbId(newId);
+        productList.add(food);
+        exampleAdapter.updateAndNotify(productList.get(productList.size() - 1));
     }
 
     @Override
     public void applyData(String name, String category, String dateOfPurchase, boolean noExpiration) {
-        ExampleProduct food;
+        ExampleProduct food = null;
+        long newId = 0;
         switch (category){
             case "Beverages":
                 food = new ExampleProduct(R.drawable.ic_drink, name, category, dateOfPurchase, noExpiration);
-                productsDB.insertProduct(food);
-                productList.add(food);
                 break;
             case "Dairy products":
                 food =  new ExampleProduct(R.drawable.ic_egg, name, category, dateOfPurchase, noExpiration);
-                productsDB.insertProduct(food);
-                productList.add(food);
                 break;
             case "Sweets":
                 food = new ExampleProduct(R.drawable.ic_sweets, name, category, dateOfPurchase, noExpiration);
-                productsDB.insertProduct(food);
-                productList.add(food);
                 break;
         }
-        //viewAll();
-        exampleAdapter.notifyItemInserted(productList.size()-1);
-        exampleAdapter.notifyItemRangeChanged(productList.size()-1, productList.size());
+        newId = productsDB.insertProduct(food);
+        food.setDbId(newId);
+        productList.add(food);
+        exampleAdapter.updateAndNotify(productList.get(productList.size() - 1));
 
     }
 }

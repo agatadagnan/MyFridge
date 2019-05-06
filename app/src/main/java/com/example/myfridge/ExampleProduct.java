@@ -12,6 +12,7 @@ tak naprawde to powinna być klasa Food
  */
 
 public class ExampleProduct {
+    private long dbId;
     private int mImageResource;
     private String productName;
     private String productCategory;
@@ -20,7 +21,7 @@ public class ExampleProduct {
     private Integer caloriesPer100g;
 
 
-    public ExampleProduct(int imageResource, String name, String category, String dateOfPurchase, String expirationDate){
+    public ExampleProduct(int imageResource, String name, String category, String dateOfPurchase, String expirationDate) {
         mImageResource = imageResource;
         productName = name;
         productCategory = category;
@@ -29,13 +30,21 @@ public class ExampleProduct {
         caloriesPer100g = null;
     }
 
-    public ExampleProduct(int imageResource, String name, String category, String dateOfPurchase, Boolean noExpiration){
+    public ExampleProduct(int imageResource, String name, String category, String dateOfPurchase, Boolean noExpiration) {
         mImageResource = imageResource;
         productCategory = category;
         productName = name;
         this.dateOfPurchase = dateOfPurchase;
         expirationDate = null;
         caloriesPer100g = null;
+    }
+
+    public void setDbId(long dbId) {
+        this.dbId = dbId;
+    }
+
+    public long getDbId(){
+        return dbId;
     }
 
     public int getImageResource(){
