@@ -10,6 +10,14 @@
         <item>Sweets</item>
     </string-array>
 
+    <string-array name="units">
+        <item>kg</item>
+        <item>g</item>
+        <item>l</item>
+        <item>ml</item>
+        <item>dl</item>
+    </string-array>
+
     <string name="add_button_text">Add</string>
     <string name="item_editText_hint">Write a new item</string>
     <string name="remove_button_text">Remove selected</string>

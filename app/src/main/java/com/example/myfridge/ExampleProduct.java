@@ -23,24 +23,32 @@ public class ExampleProduct {
     private Integer caloriesPer100g;
     private String date;
 
+    public ExampleProduct(int imageResource, String name, String category, String dateOfPurchase, String expirationDate, long dbId) {
+        this(imageResource, name, category, dateOfPurchase, expirationDate);
+        this.dbId = dbId;
+    }
 
     public ExampleProduct(int imageResource, String name, String category, String dateOfPurchase, String expirationDate) {
         mImageResource = imageResource;
         productName = name;
         productCategory = category;
         this.dateOfPurchase = dateOfPurchase;
-        this.expirationDate = expirationDate;
+        if(expirationDate == null || expirationDate.isEmpty()){
+            this.expirationDate = null;
+        }else {
+            this.expirationDate = expirationDate;
+        }
         caloriesPer100g = null;
     }
 
-    public ExampleProduct(int imageResource, String name, String category, String dateOfPurchase, Boolean noExpiration) {
-        mImageResource = imageResource;
-        productCategory = category;
-        productName = name;
-        this.dateOfPurchase = dateOfPurchase;
-        expirationDate = null;
-        caloriesPer100g = null;
-    }
+//    public ExampleProduct(int imageResource, String name, String category, String dateOfPurchase, Boolean noExpiration) {
+//        mImageResource = imageResource;
+//        productCategory = category;
+//        productName = name;
+//        this.dateOfPurchase = dateOfPurchase;
+//        expirationDate = null;
+//        caloriesPer100g = null;
+//    }
 
     public ExampleProduct(int imageResource, String name, String category, String date){
         mImageResource = imageResource;
@@ -48,6 +56,8 @@ public class ExampleProduct {
         productName = name;
         this.date = date;
     }
+
+
 
     public String date(){
         Calendar cal = Calendar.getInstance();

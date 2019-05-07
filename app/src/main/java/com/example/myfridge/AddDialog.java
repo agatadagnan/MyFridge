@@ -143,12 +143,11 @@ public class AddDialog extends AppCompatDialogFragment {
                         }else if(expirationDate.getText().toString().isEmpty()) {
 
                             //boolean noExpiration = checkBox.isChecked();
-                            boolean noExpiration = true;
                             String name = productName.getText().toString();
                             String category = productCategory.getSelectedItem().toString();
                             String purchase = dateOfPurchase.getText().toString();
                             //  expirationDate.setText("No expiration date");
-                            listener.applyData(name, category, purchase, noExpiration);
+                            listener.applyData(name, category, purchase, "");
 
 
                         }else{
@@ -169,7 +168,6 @@ public class AddDialog extends AppCompatDialogFragment {
 
 
     public interface AddDialogListener{
-        void applyData(String name, String category, String dateOfPurchase, boolean noExpiration);
         void applyData(String name, String category, String dateOfPurchase, String expiration);
     }
 }
