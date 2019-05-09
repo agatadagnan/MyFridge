@@ -8,12 +8,19 @@ Zależnie od kategorii jedzenia będzie wybierana ikonka, jeszcze nie wiem jak t
 ale to pewnie wyjdzie później
 */
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -57,6 +64,7 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
             }
         });
 
+
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         //recyclerView.setHasFixedSize(true);  //because it probably doesn't
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -92,16 +100,30 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         return rootView;
     }
 
+    public void notificationCall(int notificationId){
+        NotificationCompat.Builder notificationBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(getContext(),"channelId")
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setSmallIcon(R.drawable.ic_message)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.ic_message))
+                .setContentTitle("title")
+                .setContentText("text");
 
+        NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(notificationId,notificationBuilder.build());
+        //tu moze inne ic
+
+    }
     public void openDialogAdd(){
         AddDialog addDialog = new AddDialog();
         addDialog.setTargetFragment(this, 1);
         addDialog.show(getFragmentManager(), "AddDialog");
+
     }
 
     public void refreshData(){
         viewAll();
         exampleAdapter.updateAndNotify(productList);
+
     }
 
     public void viewAll(){
@@ -165,12 +187,14 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         exampleAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+
                 //TODO: co chcemy zrobić jak się kliknie na produkt?
             }
 
             @Override
             public void onDeleteClick(int position) {
                 removeItem(position);
+
                 //ale też będzie dodawał do listy produktów usuniętych i nowej bazy danych???
                 // i usuwał z bazy danych
             }
@@ -248,4 +272,18 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         newId = productsDB.insertProduct(food);
         food.setDbId(newId);
     }
+//    public void sendNotification(){
+//        Intent intent = new Intent(this, AlertDetails.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+//
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+//                .setSmallIcon(R.drawable.notification_icon)
+//                .setContentTitle("My notification")
+//                .setContentText("Hello World!")
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                // Set the intent that will fire when the user taps the notification
+//                .setContentIntent(pendingIntent)
+//                .setAutoCancel(true);
+//    }
 }
