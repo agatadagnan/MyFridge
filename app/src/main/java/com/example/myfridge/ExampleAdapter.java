@@ -33,6 +33,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         public TextView mTextView1;
         public TextView mTextView2;
         public TextView mTextView3;
+        public TextView dateTextView;
         public ImageView mDeleteImage;
         public ImageView mEatenImage;
 
@@ -42,6 +43,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
             mTextView1 = itemView.findViewById(R.id.productName);
             mTextView2 = itemView.findViewById(R.id.dateOfPurchase);
             mTextView3 = itemView.findViewById(R.id.expirationDate);
+            dateTextView = itemView.findViewById(R.id.date);
             mDeleteImage = itemView.findViewById(R.id.image_delete);
             mEatenImage = itemView.findViewById(R.id.image_eaten);
 
@@ -103,6 +105,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         holder.mTextView1.setText(currentItem.getName());
         holder.mTextView2.setText(currentItem.getPurchase());
         holder.mTextView3.setText(currentItem.getExpiration());
+        holder.dateTextView.setText(currentItem.getDate());
     }
 
     // ta funkcja update'uje mExampleList zanim powiadomi o zmianie zestawu danych

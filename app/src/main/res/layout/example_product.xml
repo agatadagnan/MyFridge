@@ -75,6 +75,16 @@ TextView line 2 druga linijka
             android:layout_marginEnd="60dp"
             android:src="@drawable/ic_eaten" />
 
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/dateOfPurchase"
+            android:layout_below="@+id/productName"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:text="date, only to thrown out" />
+
     </RelativeLayout>
     
 

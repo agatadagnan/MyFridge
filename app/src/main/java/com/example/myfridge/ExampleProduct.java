@@ -54,7 +54,7 @@ public class ExampleProduct {
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH) +1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
-        String date1 = month + "/" + day + "/" + year;
+        String date1 = "When?: " + month + "/" + day + "/" + year;
         return date1;
     }
 
