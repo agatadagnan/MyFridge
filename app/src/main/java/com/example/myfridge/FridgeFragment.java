@@ -25,6 +25,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+import static com.example.myfridge.MainActivity.CHANNEL_ID;
 
 public class FridgeFragment extends Fragment implements AddDialog.AddDialogListener {
 
@@ -65,13 +71,14 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         });
 
 
+
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         //recyclerView.setHasFixedSize(true);  //because it probably doesn't
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         productsDB = new DatabaseOpenHelper(getActivity());
+//        productsDB.onUpgrade(productsDB.getWritableDatabase(), productsDB.getWritableDatabase().getVersion(), productsDB.getWritableDatabase().getVersion());
         //ExampleProduct food = new ExampleProduct(R.drawable.ic_drink, "dupa", "Beverages", "5/01/2019", "6/03/2019");
         //productsDB.insertProduct(food);
-
         //createList();
         viewAll();
         createAdapter(productList, recyclerView);
@@ -96,35 +103,60 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
 
             }
         });
-
+        sendNotification();
         return rootView;
     }
 
-    public void notificationCall(int notificationId){
-        NotificationCompat.Builder notificationBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(getContext(),"channelId")
-                .setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setSmallIcon(R.drawable.ic_message)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.ic_message))
-                .setContentTitle("title")
-                .setContentText("text");
+    private void sendNotification() {
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 3);
+        SimpleDateFormat soonToExpireDate = new SimpleDateFormat("yyyy-MM-dd");
+        String date = soonToExpireDate.format(cal.getTime());
+        Cursor res = productsDB.getSoonToExpire(productCategoryF, date);
+        if(res.getCount() != 0) {
+            String text = "";
+            while (res.moveToNext()) {
+                text += res.getString(1) + " ";
+            }
+            notificationCall(text);
+        }
+
+
+    }
+
+    public void notificationCall(String text){
+        int notificationId = 1;
+
+        NotificationCompat.Builder notificationBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(getContext(),CHANNEL_ID)
+              //.setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setSmallIcon(R.drawable.ic_notification)
+              //.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.ic_message))
+                .setContentTitle("Expiration date coming at you")
+                .setContentText(text)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE);
 
         NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(notificationId,notificationBuilder.build());
-        //tu moze inne ic
-
     }
+
+
     public void openDialogAdd(){
         AddDialog addDialog = new AddDialog();
         addDialog.setTargetFragment(this, 1);
         addDialog.show(getFragmentManager(), "AddDialog");
 
+
     }
 
     public void refreshData(){
+
         viewAll();
         exampleAdapter.updateAndNotify(productList);
-
     }
+
+
 
     public void viewAll(){
         Cursor res = productsDB.getTableData(productCategoryF);
