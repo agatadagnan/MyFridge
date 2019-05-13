@@ -26,6 +26,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.myfridge.R;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -39,13 +42,25 @@ public class AddDialog extends AppCompatDialogFragment {
     private TextView dateOfPurchase;
     private DatePickerDialog.OnDateSetListener dateSetListener1;
     private DatePickerDialog.OnDateSetListener dateSetListener2;
+    private String threeDaysToExpire;
+
+
+    public String getThreeDaysToExpire() {
+        return threeDaysToExpire;
+    }
+
+
+
+
+
+
+
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
             listener = (AddDialogListener) getTargetFragment();
-            Log.d("NATALKA", listener.toString());
         } catch (ClassCastException e) {
             throw new ClassCastException(this.toString() + "must implement AddDialogListener");
         }
@@ -83,6 +98,8 @@ public class AddDialog extends AppCompatDialogFragment {
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
+
+
                 DatePickerDialog dialog2 = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, dateSetListener2,year, month, day); //????????
                 dialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog2.show();
@@ -90,13 +107,22 @@ public class AddDialog extends AppCompatDialogFragment {
         });
 
 
-
         dateSetListener1 = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month,  int dayOfMonth) {
                 month = month + 1;
-                String date1 = month + "/" + dayOfMonth + "/" + year;
+//                Calendar soon = Calendar.getInstance();
+//                soon.set(year,month,dayOfMonth);
+//                soon.setTimeInMillis(soon.getTimeInMillis() - 259200000);
+//                Date tempDate = soon.getTime();
+//                SimpleDateFormat soonToExpireDate = new SimpleDateFormat("yyyy-MM-dd");
+//                threeDaysToExpire = soonToExpireDate.format(tempDate);
+
+
+
+                String date1 = year + "-" + String.format("%02d", month) + "-" + String.format("%02d", dayOfMonth);
                 dateOfPurchase.setText(date1);
+
             }
         };
 
@@ -104,7 +130,7 @@ public class AddDialog extends AppCompatDialogFragment {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month,  int dayOfMonth) {
                 month = month + 1; //jeszcze nie wiem czy tego inaczej nie rozwiazac zeby sie nie psulo gdzies pozniej (o ile sie zepsuje heh)
-                String date2 = month + "/" + dayOfMonth + "/" + year;
+                String date2 = year + "-" + String.format("%02d", month) + "-" + String.format("%02d", dayOfMonth);
                 expirationDate.setText(date2);
             }
         };
@@ -143,12 +169,11 @@ public class AddDialog extends AppCompatDialogFragment {
                         }else if(expirationDate.getText().toString().isEmpty()) {
 
                             //boolean noExpiration = checkBox.isChecked();
-                            boolean noExpiration = true;
                             String name = productName.getText().toString();
                             String category = productCategory.getSelectedItem().toString();
                             String purchase = dateOfPurchase.getText().toString();
                             //  expirationDate.setText("No expiration date");
-                            listener.applyData(name, category, purchase, noExpiration);
+                            listener.applyData(name, category, purchase, "");
 
 
                         }else{
@@ -169,7 +194,6 @@ public class AddDialog extends AppCompatDialogFragment {
 
 
     public interface AddDialogListener{
-        void applyData(String name, String category, String dateOfPurchase, boolean noExpiration);
         void applyData(String name, String category, String dateOfPurchase, String expiration);
     }
 }
