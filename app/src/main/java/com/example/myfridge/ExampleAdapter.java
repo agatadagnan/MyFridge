@@ -31,8 +31,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
         public ImageView mImageView;
         public TextView mTextView1;
-        public TextView mTextView2;
-        public TextView mTextView3;
+        public TextView purchaseTextV;
+        public TextView expirationText;
         public TextView dateTextView;
         public ImageView mDeleteImage;
         public ImageView mEatenImage;
@@ -41,8 +41,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
             super(itemView);
             mImageView = itemView.findViewById(R.id.imageView);
             mTextView1 = itemView.findViewById(R.id.productName);
-            mTextView2 = itemView.findViewById(R.id.dateOfPurchase);
-            mTextView3 = itemView.findViewById(R.id.expirationDate);
+            purchaseTextV = itemView.findViewById(R.id.dateOfPurchase);
+            expirationText = itemView.findViewById(R.id.expirationDate);
             dateTextView = itemView.findViewById(R.id.date);
             mDeleteImage = itemView.findViewById(R.id.image_delete);
             mEatenImage = itemView.findViewById(R.id.image_eaten);
@@ -103,8 +103,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
         holder.mImageView.setImageResource(currentItem.getImageResource());
         holder.mTextView1.setText(currentItem.getName());
-        holder.mTextView2.setText(currentItem.getPurchase());
-        holder.mTextView3.setText(currentItem.getExpiration());
+        holder.purchaseTextV.setText(currentItem.getPurchase());
+        holder.expirationText.setText(currentItem.getExpiration());
         holder.dateTextView.setText(currentItem.getDate());
     }
 

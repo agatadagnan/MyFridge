@@ -39,7 +39,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             + COL_DATE + " DATE, " + COL_CATEGORY + " TEXT" + ")";
 
     public DatabaseOpenHelper(Context context) {
-        super(context, DATABASE_NAME, null, 5);
+        super(context, DATABASE_NAME, null, 6);
     }
 
     @Override

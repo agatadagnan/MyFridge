@@ -56,7 +56,7 @@ public class ShoppingListFragment extends Fragment implements AddSLDialog.AddSLD
         recyclerViewSL = (RecyclerView) rootViewSL.findViewById(R.id.recyclerViewSL);
         recyclerViewSL.setLayoutManager(new LinearLayoutManager(getActivity()));
         productsDB = new DatabaseOpenHelper(getActivity());
-        productsDB.onUpgrade(productsDB.getWritableDatabase(), productsDB.getWritableDatabase().getVersion(), productsDB.getWritableDatabase().getVersion());
+//        productsDB.onUpgrade(productsDB.getWritableDatabase(), productsDB.getWritableDatabase().getVersion(), productsDB.getWritableDatabase().getVersion());
 
         //createList();
        // viewAll();

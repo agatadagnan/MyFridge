@@ -169,37 +169,37 @@ public class FridgeFragment extends Fragment implements AddDialog.AddDialogListe
         switch (cat) {
             case "Beverages":
                 while (res.moveToNext()) {
-                    productList.add(new ExampleProduct(R.drawable.ic_drink, res.getString(1), cat, res.getString(2), res.getString(3), res.getInt(0)));
+                    productList.add(new ExampleProduct(R.drawable.ic_drink, res.getString(1), cat, res.getString(3), res.getString(4), res.getInt(0)));
                 }
                 break;
             case "Dairy products":
                 while (res.moveToNext()) {
-                    productList.add(new ExampleProduct(R.drawable.ic_egg, res.getString(1), cat, res.getString(2), res.getString(3), res.getInt(0)));
+                    productList.add(new ExampleProduct(R.drawable.ic_egg, res.getString(1), cat, res.getString(3), res.getString(4), res.getInt(0)));
                 }
                 break;
             case "Fruits and Vegetables":
                 while (res.moveToNext()) {
-                    productList.add(new ExampleProduct(R.drawable.ic_apple, res.getString(1), cat, res.getString(2), res.getString(3), res.getInt(0)));
+                    productList.add(new ExampleProduct(R.drawable.ic_apple, res.getString(1), cat, res.getString(3), res.getString(4), res.getInt(0)));
                 }
                 break;
             case "Grain products":
                 while (res.moveToNext()) {
-                    productList.add(new ExampleProduct(R.drawable.ic_bread, res.getString(1), cat, res.getString(2), res.getString(3), res.getInt(0)));
+                    productList.add(new ExampleProduct(R.drawable.ic_bread, res.getString(1), cat, res.getString(3), res.getString(4), res.getInt(0)));
                 }
                 break;
             case "Meat":
                 while (res.moveToNext()) {
-                    productList.add(new ExampleProduct(R.drawable.ic_meat, res.getString(1), cat, res.getString(2), res.getString(3), res.getInt(0)));
+                    productList.add(new ExampleProduct(R.drawable.ic_meat, res.getString(1), cat, res.getString(3), res.getString(4), res.getInt(0)));
                 }
                 break;
             case "Spices":
                 while (res.moveToNext()) {
-                    productList.add(new ExampleProduct(R.drawable.ic_salt, res.getString(1), cat, res.getString(2), res.getString(3), res.getInt(0)));
+                    productList.add(new ExampleProduct(R.drawable.ic_salt, res.getString(1), cat, res.getString(3), res.getString(4), res.getInt(0)));
                 }
                 break;
             case "Sweets":
                 while (res.moveToNext()) {
-                    productList.add(new ExampleProduct(R.drawable.ic_sweets, res.getString(1), cat, res.getString(2), res.getString(3), res.getInt(0)));
+                    productList.add(new ExampleProduct(R.drawable.ic_sweets, res.getString(1), cat, res.getString(3), res.getString(4), res.getInt(0)));
                 }
                 break;
         }
